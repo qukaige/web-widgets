@@ -58,3 +58,33 @@ See [CONTRIBUTING.md](https://github.com/mendix/web-widgets/blob/main/CONTRIBUTI
 ## Raising problems/issues
 
 -   We encourage everyone to open a support ticket through [Mendix Support](https://support.mendix.com) in case of problems with widgets or scaffolding tools (Pluggable Widgets Generator or Pluggable Widgets Tools).
+
+
+## 自定义配置
+
+```json
+{
+  "customobj": {
+    "toFixed": "1",
+    "y": "true"
+  }
+}
+```
+<table>
+<tr>
+<td>参数</td>
+<td>说明</td>
+</tr>
+<tr>
+<td>customobj</td>
+<td>扩展对象</td>
+</tr>
+<tr>
+<td>toFixed</td>
+<td>保留小数位数</td>
+</tr>
+<tr>
+<td>x or y</td>
+<td>处理y轴, 或x轴数据</td>
+</tr>
+</table>
