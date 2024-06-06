@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popup menu renders popup menu 1`] = `
+<div
+  className="popupmenu mx-popup-menu"
+  onClick={[Function]}
+>
+  <div
+    className="popupmenu-trigger"
+  >
+    <button>
+      Trigger
+    </button>
+  </div>
+</div>
+`;

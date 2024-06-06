@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.treenode.TreeNode" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+    <name>Tree node</name>
+    <description>Display a tree view structure</description>
+    <studioProCategory>Data containers</studioProCategory>
+    <studioCategory>Data Containers</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/modules/tree-node</helpUrl>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="advancedMode" type="boolean" defaultValue="false">
+                    <caption>Enable advanced options</caption>
+                    <description />
+                </property>
+                <property key="datasource" type="datasource" isList="true">
+                    <caption>Data source</caption>
+                    <description />
+                </property>
+                <property key="headerType" type="enumeration" defaultValue="text">
+                    <caption>Header type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="text">Text</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="openNodeOn" type="enumeration" defaultValue="headerClick">
+                    <caption>Open node when</caption>
+                    <description>Define which part of the node, when clicked, should open or close this node. "Header is clicked" means the whole header is clickable, while "Icon is clicked" means only the icon is used to switch node state.</description>
+                    <enumerationValues>
+                        <enumerationValue key="headerClick">Header is clicked</enumerationValue>
+                        <enumerationValue key="iconClick">Icon is clicked</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="headerContent" type="widgets" dataSource="datasource" required="false">
+                    <caption>Header</caption>
+                    <description />
+                </property>
+                <property key="headerCaption" type="textTemplate" dataSource="datasource" required="false">
+                    <caption>Header caption</caption>
+                    <description />
+                </property>
+                <property key="hasChildren" type="boolean" defaultValue="true">
+                    <caption>Has children</caption>
+                    <description>Indicate whether the node has children or is an end node. When set to yes, a composable region becomes available to define the child nodes.</description>
+                </property>
+                <property key="startExpanded" type="boolean" defaultValue="false">
+                    <caption>Start expanded</caption>
+                    <description />
+                </property>
+                <property key="children" type="widgets" dataSource="datasource" required="false">
+                    <caption>Place other Tree nodes here</caption>
+                    <description />
+                </property>
+                <property key="animate" type="boolean" defaultValue="true">
+                    <caption>Animate</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Visualization">
+            <propertyGroup caption="Icon">
+                <property key="showIcon" type="enumeration" defaultValue="left">
+                    <caption>Show icon</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="left">Left</enumerationValue>
+                        <enumerationValue key="right">Right</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="expandedIcon" type="icon" required="false">
+                    <caption>Expanded icon</caption>
+                    <description />
+                </property>
+                <property key="collapsedIcon" type="icon" required="false">
+                    <caption>Collapsed icon</caption>
+                    <description />
+                </property>
+                <property key="animateIcon" type="boolean" defaultValue="true">
+                    <caption>Animate icon</caption>
+                    <description>Animate the icon when the group is collapsing or expanding.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

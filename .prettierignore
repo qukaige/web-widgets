@@ -1,0 +1,12 @@
+packages/tools/generator-widget/generators/app/templates
+packages/tools/pluggable-widgets-tools/tests/projects
+packages/pluggableWidgets/*/typings
+packages/modules/*/src/javascriptsource/**/*.js
+*.png
+*.svg
+*.snap
+**/dist
+.idea
+.husky
+.vscode
+pnpm-lock.yaml

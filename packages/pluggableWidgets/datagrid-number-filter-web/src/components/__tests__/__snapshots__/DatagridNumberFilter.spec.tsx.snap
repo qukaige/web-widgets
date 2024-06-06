@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Number Filter with single instance with multiple attributes renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="filter-container filter-custom-class"
+    data-focusindex="0"
+  >
+    <div
+      class="filter-selector"
+    >
+      <div
+        class="filter-selector-content"
+      >
+        <button
+          aria-controls="NumberFilter1-filter-selectors"
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="btn btn-default filter-selector-button button-icon equal"
+        >
+           
+        </button>
+      </div>
+    </div>
+    <input
+      class="form-control filter-input"
+      type="number"
+      value=""
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Number Filter with single instance with no context renders error message 1`] = `
+<DocumentFragment>
+  <div
+    class="alert alert-danger"
+  >
+    The Number filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Number Filter with single instance with single attribute renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="filter-container filter-custom-class"
+    data-focusindex="0"
+  >
+    <div
+      class="filter-selector"
+    >
+      <div
+        class="filter-selector-content"
+      >
+        <button
+          aria-controls="NumberFilter1-filter-selectors"
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="btn btn-default filter-selector-button button-icon equal"
+        >
+           
+        </button>
+      </div>
+    </div>
+    <input
+      class="form-control filter-input"
+      type="number"
+      value=""
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Number Filter with single instance with wrong attribute's type renders error message 1`] = `
+<DocumentFragment>
+  <div
+    class="alert alert-danger"
+  >
+    The attribute type being used for Number filter is not 'Autonumber, Decimal, Integer or Long'
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Number Filter with single instance with wrong multiple attributes' types renders error message 1`] = `
+<DocumentFragment>
+  <div
+    class="alert alert-danger"
+  >
+    The Number filter widget can't be used with the filters options you have selected. It requires a "Autonumber, Decimal, Integer or Long" attribute to be selected.
+  </div>
+</DocumentFragment>
+`;

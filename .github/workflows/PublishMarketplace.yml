@@ -1,0 +1,51 @@
+name: "Publishes a package to marketplace"
+
+on:
+    release:
+        types: [published]
+
+jobs:
+    publish-new-version:
+        name: "Publish a new package version from GitHub release"
+        runs-on: ubuntu-latest
+        env:
+            TAG: ${{ github.ref_name }}
+
+        steps:
+            - name: Check release tag
+              run: |
+                  match=$(node -p "(/^[a-z0-9-]+-v\d+\.\d+\.\d+$/m).exec('$TAG') ? 1 : -1")
+                  if [ $match -eq -1 ];
+                  then
+                    echo "::error::Invalid tag format."
+                    exit 1
+                  fi
+            - name: "Set PACKAGE env var"
+              run: echo "PACKAGE=${TAG%-v*}" >> $GITHUB_ENV
+            - name: Checkout
+              uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+              with:
+                  fetch-depth: 1
+            - name: Setup pnpm
+              uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3.0.0
+            - name: Setup node
+              uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+              with:
+                  node-version-file: ".nvmrc"
+                  cache: "pnpm"
+            - name: Search for package in workspace
+              run: |
+                  if [[ -z "$(pnpm ls --json --filter=$PACKAGE)" ]];
+                  then
+                    echo "::error::Package $PACKAGE not found in workspace.";
+                    exit 1;
+                  fi
+            - name: Install dependencies
+              run: pnpm install
+            - name: Run publish script
+              run: pnpm run publish-marketplace --filter=$PACKAGE
+              env:
+                  CPAPI_URL: ${{ secrets.CPAPI_URL }}
+                  CPAPI_USER: ${{ secrets.CPAPI_USER }}
+                  CPAPI_USER_OPENID: ${{ secrets.CPAPI_USER_OPENID }}
+                  CPAPI_PASS: ${{ secrets.CPAPI_PASS }}

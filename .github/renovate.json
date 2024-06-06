@@ -1,0 +1,36 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
+    "extends": ["config:recommended", ":disablePrControls"],
+    "labels": ["dependencies"],
+    "rebaseLabel": "renovate-rebase",
+    "branchPrefix": "deps/",
+    "prHourlyLimit": 5,
+    "prConcurrentLimit": 5,
+    "prCreation": "immediate",
+    "forkProcessing": "disabled",
+    "dependencyDashboard": true,
+    "reviewersFromCodeOwners": true,
+    "minimumReleaseAge": "5 days",
+    "docker-compose": {
+        "enabled": false
+    },
+    "major": {
+        "description": "Disable major updates",
+        "enabled": false
+    },
+    "separateMajorMinor": true,
+    "lockFileMaintenance": {
+        "enabled": true
+    },
+    "allowScripts": true,
+    "ignoreScripts": false,
+    "ignoreDeps": ["typescript"],
+    "packageRules": [
+        { "matchCategories": ["docker"], "enabled": false },
+        { "matchPackagePatterns": ["*"], "rangeStrategy": "bump" },
+        { "matchDepTypes": ["devDependencies"], "prPriority": -1 },
+        { "matchPackagePrefixes": ["@mendix"], "prPriority": 5 },
+        { "matchPackageNames": ["mendix"], "prPriority": 5 }
+    ]
+}

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rich Text renders richtext widget 1`] = `
+<div>
+  <div
+    class="widget-rich-text widget-rich-text-min-height"
+    id="RichText1"
+    style="width: 100%; min-height: 75px;"
+  >
+    <div
+      class="mx-progress"
+    />
+  </div>
+</div>
+`;
