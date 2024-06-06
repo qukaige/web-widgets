@@ -60,8 +60,9 @@ See [CONTRIBUTING.md](https://github.com/mendix/web-widgets/blob/main/CONTRIBUTI
 -   We encourage everyone to open a support ticket through [Mendix Support](https://support.mendix.com) in case of problems with widgets or scaffolding tools (Pluggable Widgets Generator or Pluggable Widgets Tools).
 
 
-## 自定义配置
-
+## 自定义配置, 保留小数位数
+![](img_1.png)
+![](img.png)
 ```json
 {
   "customobj": {
