@@ -31,9 +31,10 @@ export interface IColumnParentStore {
 }
 
 export class ColumnGroupStore implements IColumnGroupStore, IColumnParentStore {
+    // 定义columns
     readonly _allColumns: ColumnStore[];
     readonly _allColumnsById: Map<ColumnId, ColumnStore> = new Map();
-
+    // 定义列过滤器
     readonly columnFilters: ColumnFilterStore[];
 
     sorting: ColumnsSortingStore;
@@ -41,19 +42,21 @@ export class ColumnGroupStore implements IColumnGroupStore, IColumnParentStore {
     constructor(props: Pick<DatagridContainerProps, "columns" | "datasource">) {
         this._allColumns = [];
         this.columnFilters = [];
-
+        // TODO KG props.columns, 就是你在Columns中选择的列
         props.columns.forEach((columnProps, i) => {
             const column = new ColumnStore(i, columnProps, this);
+            //  将每个column添加到Map中, 后续可以通过 get(1)方式 获取到column对象, 这里的columnId实际对应的是 索引i
             this._allColumnsById.set(column.columnId, column);
+            //  将每个column添加到数组中
             this._allColumns[i] = column;
-
+            // 初始化列过滤器, 当对列进行赛选的时候触发
             this.columnFilters[i] = new ColumnFilterStore(columnProps, props.datasource.filter);
         });
-
+        // TODO KG 设置的列排序规则
         this.sorting = new ColumnsSortingStore(
             sortInstructionsToSortRules(props.datasource.sortOrder, this._allColumns)
         );
-
+        // 设置可观察属性
         makeObservable<ColumnGroupStore, "_allColumns" | "_allColumnsOrdered">(this, {
             _allColumns: observable,
 

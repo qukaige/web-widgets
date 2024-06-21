@@ -5,15 +5,16 @@ import { autorun, IReactionDisposer } from "mobx";
 import { and } from "mendix/filters/builders";
 
 export function useRootStore(props: DatagridContainerProps): RootGridStore {
+    // 根据props创建 RootGridStore 对象
     const [rootStore] = useState(() => {
         return new RootGridStore(props);
     });
-
+    //  useRef声明对象, 只有 current 属性
     const datasourceRef = useRef(props.datasource);
-    datasourceRef.current = props.datasource;
+    datasourceRef.current = props.datasource; // 多此一举??
 
     useEffect(() => {
-        const disposers: IReactionDisposer[] = [];
+        const disposers: IReactionDisposer[] = []; // autorun 返回的类型, 取消autorun运行
         // apply sorting
         disposers.push(
             autorun(() => {

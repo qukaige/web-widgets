@@ -27,7 +27,6 @@ interface Props extends DatagridContainerProps {
 }
 
 const Container = observer((props: Props): ReactElement => {
-    debugger
     const isInfiniteLoad = props.pagination === "virtualScrolling" || props.pagination === "loadMore";
     const currentPage = isInfiniteLoad
         ? props.datasource.limit / props.pageSize
@@ -64,6 +63,8 @@ const Container = observer((props: Props): ReactElement => {
             [props.datasource]
         )
     });
+
+    console.debug("[DG2Export]", items, exporting, processedRows, abort);
 
     useEffect(() => {
         if (props.refreshInterval > 0) {

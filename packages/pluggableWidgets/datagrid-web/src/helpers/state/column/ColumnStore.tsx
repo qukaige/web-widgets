@@ -44,7 +44,7 @@ export class ColumnStore implements GridColumn {
         this.columnIndex = index; // this number also never changes
         this.isHidden = this.baseInfo.initiallyHidden;
         this.orderWeight = index * 10;
-
+        // 设置当前对象为观察对象
         makeObservable<
             ColumnStore,
             "_visible" | "_header" | "_columnClass" | "_tooltip" | "_attribute" | "_dynamicText" | "_content"

@@ -11,8 +11,11 @@ export class RootGridStore {
     settingsStore: GridPersonalizationStore;
 
     constructor(props: DatagridContainerProps) {
+        // 主要设置分页数量, 是否查询总数设置
         this.setInitParams(props);
+        // 设置列相关的操作, 列初始化, 列排序, 列筛选等
         this.columnsStore = new ColumnGroupStore(props);
+        // TODO KG 应该是列赛选
         this.headerFiltersStore = new HeaderFiltersStore(props);
         this.settingsStore = new GridPersonalizationStore(props, this.columnsStore);
     }

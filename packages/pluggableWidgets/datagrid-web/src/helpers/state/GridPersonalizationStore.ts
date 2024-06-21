@@ -37,13 +37,14 @@ export class GridPersonalizationStore {
 
         this.disposers.push(
             reaction(
-                () => this.storage.settings,
+                () => this.storage.settings, // 被监听的对象
                 settings => {
+                    // 当参数1变化时执行
                     if (settings !== undefined && JSON.stringify(settings) !== JSON.stringify(this.settings)) {
                         this.applySettings(settings);
                     }
                 },
-                { fireImmediately: true }
+                { fireImmediately: true } // 立即执行
             )
         );
 

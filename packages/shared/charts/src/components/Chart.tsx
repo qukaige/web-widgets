@@ -45,38 +45,85 @@ export const Chart = ({
     );
 
     const plotlyData = useMemo(() => createPlotlyData(data, seriesOptions), [data, seriesOptions]);
+    const aggregateData = (xValues: any[], yValues: any[]): any[] => {
+        const aggregatedData: { [key: string]: number } = {};
+        const order: string[] = [];
 
+        for (let i = 0; i < xValues.length; i++) {
+            const x = xValues[i];
+            const y = parseFloat(yValues[i]);
+
+            if (aggregatedData[x] !== undefined) {
+                aggregatedData[x] += y;
+                order.push(x);
+            } else {
+                aggregatedData[x] = y;
+                order.push(x);
+            }
+        }
+
+        return order.map(x => aggregatedData[x]);
+    };
     const formatYValue = (y: any, f: any) => {
         if (y >= 1000000000) {
-            return (y / 1000000000).toFixed(f) + 'B';
+            return (y / 1000000000).toFixed(f) + "B";
         } else if (y >= 1000000) {
-            return (y / 1000000).toFixed(f) + 'M';
+            return (y / 1000000).toFixed(f) + "M";
         } else if (y >= 1000) {
-            return (y / 1000).toFixed(f) + 'K';
+            return (y / 1000).toFixed(f) + "K";
         } else {
             return y.toFixed(f);
         }
     };
-    plotlyData.forEach(item => {
-        // @ts-ignore
-        if (item.customobj) {
+    // @ts-ignore
+    if (plotlyData.length > 0 && plotlyData[0]["customobj"]) {
+        plotlyData.forEach(item => {
             // @ts-ignore
-            if (item.customobj.y) {
+            if (item.customobj) {
                 // @ts-ignore
-                let yArr = item['y'];
+                if (item.customobj.y) {
+                    // @ts-ignore
+                    let yArr = item["y"];
+                    // @ts-ignore
+                    let xArr = item["x"];
+                    // @ts-ignore
+                    if (item["transforms"].length > 0) {
+                        // @ts-ignore
+                        item["text"] = aggregateData(xArr, yArr).map(v =>
+                            formatYValue(v, item.customobj.toFixed ? item.customobj.toFixed : 1)
+                        );
+                    } else {
+                        // @ts-ignore
+                        item["text"] = yArr.map(v =>
+                            formatYValue(v, item.customobj.toFixed ? item.customobj.toFixed : 1)
+                        );
+                    }
+                }
                 // @ts-ignore
-                item['text'] = yArr.map((v) => formatYValue(v, item.customobj.toFixed ? item.customobj.toFixed : 1));
+                if (item.customobj.x) {
+                    // @ts-ignore
+                    // @ts-ignore
+                    let yArr = item["y"];
+                    // @ts-ignore
+                    let xArr = item["x"];
+                    // @ts-ignore
+                    if (item["transforms"].length > 0) {
+                        // @ts-ignore
+                        item["text"] = aggregateData(yArr, xArr).map(v =>
+                            formatYValue(v, item.customobj.toFixed ? item.customobj.toFixed : 1)
+                        );
+                    } else {
+                        // @ts-ignore
+                        item["text"] = xArr.map(v =>
+                            formatYValue(v, item.customobj.toFixed ? item.customobj.toFixed : 1)
+                        );
+                    }
+                }
             }
-            // @ts-ignore
-            if (item.customobj.x) {
-                // @ts-ignore
-                let xArr = item['x'];
-                // @ts-ignore
-                item['text'] = xArr.map((v) => formatYValue(v, item.customobj.toFixed ? item.customobj.toFixed : 1));
-            }
-        }
-    });
-    console.info('kg','plotlyData=', plotlyData)
+        });
+    }
+    console.info("kg", "plotlyData=", plotlyData);
+
     const handleChartClick = useCallback<NonNullable<PlotParams["onClick"]>>(
         event => {
             // As this is click handler, this event has single, "clicked" point, so we can destruct.
@@ -90,6 +137,10 @@ export const Chart = ({
     );
 
     useResizeOnDataReadyEffect(data);
+
+    useEffect(() => {
+        console.info("kg useEffect", "plotlyData=", plotlyData);
+    }, [plotlyData]);
 
     return (
         <ReactPlotlyChartComponent
